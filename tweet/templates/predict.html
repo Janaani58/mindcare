@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindCare - Analyze Your Emotions</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <i class="fas fa-brain"></i> MindCare
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="/#features" class="nav-link">Features</a></li>
+                <li><a href="/predict" class="nav-link active">Analyze</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Predict Section -->
+    <section class="predict-section">
+        <div class="predict-container">
+            <div class="predict-header">
+                <h1>Analyze Your Emotions</h1>
+                <p>Share your thoughts and let our AI detect your emotional patterns</p>
+                {% if dataset_loaded %}
+                    <div class="dataset-badge">
+                        <i class="fas fa-database"></i> Trained on 10,314+ Real Tweets
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="predict-content">
+                <!-- Input Section -->
+                <div class="input-section">
+                    <form action="/analyze" method="post" class="analyze-form">
+                        <div class="textarea-wrapper">
+                            <textarea 
+                                name="text" 
+                                class="emotion-textarea" 
+                                placeholder="Type your thoughts here... Be honest and authentic. Your data is completely private and secure."
+                                rows="8"
+                                required
+                            >{{ text if text }}</textarea>
+                            <div class="char-count">
+                                <span id="char-counter">0</span> / 500 characters
+                            </div>
+                        </div>
+
+                        {% if error %}
+                            <div class="error-message">
+                                <i class="fas fa-exclamation-circle"></i> {{ error }}
+                            </div>
+                        {% endif %}
+
+                        <button type="submit" class="btn btn-analyze">
+                            <i class="fas fa-magic"></i> Analyze My Emotions
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Results Section -->
+                {% if prediction %}
+                    <div class="results-section slide-in">
+                        <div class="results-header">
+                            <h2>📊 Your Analysis Results</h2>
+                        </div>
+
+                        <div class="results-cards">
+                            <!-- Risk Assessment -->
+                            <div class="result-card risk-card">
+                                <div class="card-header">
+                                    <i class="fas fa-heartbeat"></i>
+                                    <h3>Risk Assessment</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="risk-badge" data-risk="{{ risk_color }}">
+                                        {{ prediction }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Dominant Emotion -->
+                            <div class="result-card emotion-card">
+                                <div class="card-header">
+                                    <i class="fas fa-grin"></i>
+                                    <h3>Primary Emotion</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="emotion-badge">
+                                        {{ emotion }}
+                                        {% if emotion == "Sad" %}
+                                            <span class="emotion-icon">😢</span>
+                                        {% elif emotion == "Happy" %}
+                                            <span class="emotion-icon">😊</span>
+                                        {% elif emotion == "Lonely" %}
+                                            <span class="emotion-icon">🤕</span>
+                                        {% elif emotion == "Excited" %}
+                                            <span class="emotion-icon">🎉</span>
+                                        {% elif emotion == "Anxious" %}
+                                            <span class="emotion-icon">😰</span>
+                                        {% elif emotion == "Angry" %}
+                                            <span class="emotion-icon">😠</span>
+                                        {% elif emotion == "Pain" %}
+                                            <span class="emotion-icon">💔</span>
+                                        {% elif emotion == "Heartbreak" %}
+                                            <span class="emotion-icon">💔</span>
+                                        {% elif emotion == "Depression" %}
+                                            <span class="emotion-icon">😔</span>
+                                        {% elif emotion == "Fear" %}
+                                            <span class="emotion-icon">😨</span>
+                                        {% elif emotion == "Guilt" %}
+                                            <span class="emotion-icon">😞</span>
+                                        {% elif emotion == "Betrayal" %}
+                                            <span class="emotion-icon">😠</span>
+                                        {% elif emotion == "Exhaustion" %}
+                                            <span class="emotion-icon">😫</span>
+                                        {% elif emotion == "Frustration" %}
+                                            <span class="emotion-icon">😡</span>
+                                        {% elif emotion == "Low Esteem" %}
+                                            <span class="emotion-icon">😔</span>
+                                        {% else %}
+                                            <span class="emotion-icon">😐</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- All Detected Emotions -->
+                        {% if detected_emotions %}
+                            <div class="detected-emotions-section">
+                                <h3>📊 emotions Detected in Your Text</h3>
+                                <div class="emotions-breakdown">
+                                    {% for emotion, count in detected_emotions.items() %}
+                                        <div class="emotion-item">
+                                            <div class="emotion-header">
+                                                <span class="emotion-name">{{ emotion.replace('_', ' ').title() }}</span>
+                                                <span class="emotion-count">{{ count }} {% if count == 1 %}keyword{% else %}keywords{% endif %}</span>
+                                            </div>
+                                            {% if emotion in detected_keywords %}
+                                                <div class="keywords-found">
+                                                    <strong>Keywords found:</strong>
+                                                    <span class="keywords-list">
+                                                        {% for keyword in detected_keywords[emotion] %}
+                                                            <span class="keyword-tag">{{ keyword }}</span>
+                                                        {% endfor %}
+                                                    </span>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        <!-- Input Display -->
+                        <div class="input-display">
+                            <h3>Your Input</h3>
+                            <div class="input-text">
+                                <p>{{ text }}</p>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="action-buttons">
+                            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="btn btn-secondary">
+                                <i class="fas fa-redo"></i> Analyze Again
+                            </button>
+                            <a href="/" class="btn btn-outline">
+                                <i class="fas fa-home"></i> Back to Home
+                            </a>
+                        </div>
+
+                        <!-- Recommendations -->
+                        <div class="recommendations">
+                            <h3>💡 Helpful Resources</h3>
+                            <div class="resources-grid">
+                                <div class="resource-item">
+                                    <i class="fas fa-phone"></i>
+                                    <h4>Crisis Support</h4>
+                                    <p>If you're in crisis, call 988 (Suicide & Crisis Lifeline)</p>
+                                </div>
+                                <div class="resource-item">
+                                    <i class="fas fa-book"></i>
+                                    <h4>Mental Health Tips</h4>
+                                    <p>Visit mental health resources and self-help guides</p>
+                                </div>
+                                <div class="resource-item">
+                                    <i class="fas fa-user-md"></i>
+                                    <h4>Professional Help</h4>
+                                    <p>Consider speaking with a mental health professional</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="empty-state">
+                        <div class="empty-icon">
+                            <i class="fas fa-feather"></i>
+                        </div>
+                        <h3>Share Your Thoughts</h3>
+                        <p>Type something in the text area above and click "Analyze My Emotions" to get started.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 MindCare - Your Mental Health Companion. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a> | 
+                <a href="#">Terms of Service</a> | 
+                <a href="#">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        // Character counter
+        const textarea = document.querySelector('.emotion-textarea');
+        const charCounter = document.getElementById('char-counter');
+        
+        if (textarea) {
+            textarea.addEventListener('input', function() {
+                charCounter.textContent = this.value.length;
+            });
+            // Update on page load if text exists
+            charCounter.textContent = textarea.value.length;
+        }
+    </script>
+</body>
+</html>

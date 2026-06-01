@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Depression Detection App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>🧠 Depression Detection & Emotion Analysis</h1>
+    <p>Enter your thoughts below for emotional analysis:</p>
+
+    {% if dataset_loaded %}
+        <p class="dataset-info">✅ Dataset Loaded: Using sentiment_tweets3.csv</p>
+    {% else %}
+        <p class="dataset-warning">⚠️ CSV Dataset not loaded</p>
+    {% endif %}
+
+    <form action="/predict" method="post">
+        <textarea name="text" placeholder="Type your message..." required>{{ text if text }}</textarea>
+        <button type="submit">Analyze Emotions</button>
+    </form>
+
+    {% if prediction %}
+        <div class="result">
+            <h2>📊 Analysis Result:</h2>
+            
+            <div class="risk-box">
+                <h3>{{ prediction }}</h3>
+            </div>
+
+            <div class="emotion-box">
+                <h3>Detected Emotion: <span class="emotion-tag">{{ emotion }}</span></h3>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>

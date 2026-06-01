@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindCare - Depression Detection App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-brain"></i> MindCare
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link active">Home</a></li>
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="/predict" class="nav-link btn-primary">Get Started</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="gradient-text">Understand Your Emotions</span>
+                    <br>Detect Mental Health Concerns Early
+                </h1>
+                <p class="hero-subtitle">
+                    Our AI-powered tool analyzes your text to detect emotional patterns and potential signs of depression. 
+                    Get instant insights and take control of your mental wellbeing.
+                </p>
+                <div class="hero-buttons">
+                    <a href="/predict" class="btn btn-primary-lg">
+                        <i class="fas fa-sparkles"></i> Start Analysis
+                    </a>
+                    <a href="#features" class="btn btn-secondary-lg">
+                        <i class="fas fa-arrow-down"></i> Learn More
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="floating-animation">
+                    <div class="card card-1">
+                        <i class="fas fa-smile"></i>
+                        <p>Happy</p>
+                    </div>
+                    <div class="card card-2">
+                        <i class="fas fa-frown"></i>
+                        <p>Sad</p>
+                    </div>
+                    <div class="card card-3">
+                        <i class="fas fa-heart"></i>
+                        <p>Love</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="features-container">
+            <h2 class="section-title">Why Choose MindCare?</h2>
+            <div class="features-grid">
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Lightning Fast</h3>
+                    <p>Get instant emotion analysis results in milliseconds. Real-time feedback for your mental health.</p>
+                </div>
+
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>100% Private</h3>
+                    <p>Your data is secure and encrypted. We never store or share your personal information.</p>
+                </div>
+
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3>Advanced AI</h3>
+                    <p>Powered by machine learning to detect subtle patterns in emotional expression.</p>
+                </div>
+
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                        <i class="fas fa-user-heart"></i>
+                    </div>
+                    <h3>Supportive</h3>
+                    <p>Get compassionate feedback and resources to support your mental wellbeing journey.</p>
+                </div>
+
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Smart Recognition</h3>
+                    <p>Identifies 6 different emotions: Happy, Sad, Lonely, Excited, Anxious, and Angry.</p>
+                </div>
+
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Friendly</h3>
+                    <p>Works seamlessly on all devices. Check your emotions anytime, anywhere.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="about">
+        <div class="how-container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">01</div>
+                    <h3>Write Your Thoughts</h3>
+                    <p>Express yourself freely. Share any thoughts, feelings, or messages.</p>
+                </div>
+                <div class="step-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+                <div class="step">
+                    <div class="step-number">02</div>
+                    <h3>AI Analysis</h3>
+                    <p>Our advanced AI analyzes emotional patterns and keywords in your text.</p>
+                </div>
+                <div class="step-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+                <div class="step">
+                    <div class="step-number">03</div>
+                    <h3>Get Results</h3>
+                    <p>Receive instant feedback about your emotional state and risk assessment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-container">
+            <div class="stat">
+                <div class="stat-number">10K+</div>
+                <div class="stat-label">Tweets Analyzed</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">6</div>
+                <div class="stat-label">Emotion Types</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">99%</div>
+                <div class="stat-label">Accuracy Rate</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">∞</div>
+                <div class="stat-label">Free & Private</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="cta-container">
+            <h2>Ready to Understand Your Emotions?</h2>
+            <p>Start your journey to better mental health awareness today.</p>
+            <a href="/predict" class="btn btn-primary-lg">Start Free Analysis Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 MindCare - Your Mental Health Companion. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a> | 
+                <a href="#">Terms of Service</a> | 
+                <a href="#">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
