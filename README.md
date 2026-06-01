@@ -1,12 +1,12 @@
-# 🔹 Depression Detection App
+Depression Detection App
 
 A web-based application using Python Flask that detects early signs of depression from user input text. The system accepts user text (simulating social media posts), processes it using a machine learning model, and classifies the emotional state.
 
-## 📋 Project Description
+Project Description
 
 Build a web-based application using Python Flask that detects early signs of depression from user input text. The system should accept user text (simulating social media posts), process it using a machine learning model (such as an Attention-based Bi-LSTM), and classify the emotional state. The application should display a depression risk score along with simple feedback. The UI should be clean and user-friendly using HTML and CSS. The backend should handle prediction logic and return results dynamically.
 
-## 📁 Folder Structure
+ Folder Structure
 
 ```
 project/
@@ -19,7 +19,7 @@ project/
 └── README.md
 ```
 
-## 🚀 How to Run
+ How to Run
 
 ### 1. Install dependencies
 
@@ -40,15 +40,15 @@ Navigate to:
 http://127.0.0.1:5000
 ```
 
-## 🎨 Features
+## Features
 
-- ✅ Clean, user-friendly UI
-- ✅ Real-time text analysis
-- ✅ Risk classification (Low, Moderate, High)
-- ✅ Responsive design
-- ✅ Easy backend integration
+- Clean, user-friendly UI
+- Real-time text analysis
+- Risk classification (Low, Moderate, High)
+- Responsive design
+- Easy backend integration
 
-## 🔧 Next Steps (Important 🚀)
+## Next Steps
 
 Currently, this uses **dummy keyword-based logic** for demonstration.
 
@@ -77,12 +77,12 @@ from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 ```
 
-## 📦 Requirements
+## Requirements
 
 - Python 3.7+
 - Flask
 - TensorFlow/Keras (for ML model integration)
 
-## 📝 License
+## License
 
 This is a starter template for educational purposes.
